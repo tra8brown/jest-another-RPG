@@ -20,3 +20,24 @@ test('creates a player object', () => {
         expect.arrayContaining([expect.any(Object)])
     );
 });
+
+//10.2.6 test to fail. checking that player.getStats() returns an obj with 4 specific properties.//
+test("gets player's stats as an object", () => {
+    const player = new Player('Dave');
+
+    expect(player.getStats()).toHaveProperty('potions');
+    expect(player.getStats()).toHaveProperty('health');
+    expect(player.getStats()).toHaveProperty('strength');
+    expect(player.getStats()).toHaveProperty('agility');
+});
+
+//10.2.6 test to fail. call to player.inventory() should return an array & false//
+test('gets inventory from player or returns false', () => {
+    const player = new Player('Dave');
+
+    expect(player.getInventory()).toEqual(expect.any(Array));
+
+    player.inventory = [];
+
+    expect(player.getInventory()).toEqual(false);
+});
