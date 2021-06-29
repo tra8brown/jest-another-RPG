@@ -1,11 +1,8 @@
-//10.2.3 from 10.1.7lesson
 const Player = require('../lib/Player.js');
-//10.2.5 added both after creating /lib/__mocks__Potion.js
 const Potion = require('../lib/Potion.js');
 
 jest.mock('../lib/Potion.js');
 
-//10.2.3 test, fail. npm run test
 test('creates a player object', () => {
     const player = new Player('Dave');
 
@@ -14,7 +11,6 @@ test('creates a player object', () => {
     expect(player.strength).toEqual(expect.any(Number));
     expect(player.agility).toEqual(expect.any(Number));
 
-    //10.2.5 test to fail
     expect(player.inventory).toEqual(expect.arrayContaining([expect.any(Object)]));
 });
 
@@ -24,7 +20,6 @@ test("gets player's health value", () => {
     expect(player.getHealth()).toEqual(expect.stringContaining(player.health.toString()));
 });
 
-//10.2.6 test to fail. checking that player.getStats() returns an obj with 4 specific properties.//
 test("gets player's stats as an object", () => {
     const player = new Player('Dave');
 
@@ -34,7 +29,6 @@ test("gets player's stats as an object", () => {
     expect(player.getStats()).toHaveProperty('agility');
 });
 
-//10.3.3. after adding player test
 test('checks if player is alive or not', () => {
     const player = new Player('Dave');
 
@@ -45,7 +39,6 @@ test('checks if player is alive or not', () => {
     expect(player.isAlive()).toBeFalsy();
 });
 
-//10.2.6 test to fail. call to player.inventory() should return an array & false//
 test('gets inventory from player or returns false', () => {
     const player = new Player('Dave');
 
@@ -56,7 +49,6 @@ test('gets inventory from player or returns false', () => {
     expect(player.getInventory()).toEqual(false);
 });
 
-//10.3.4.potion inventory  
 test('adds a potion to the inventory', () => {
     const player = new Player('Dave');
     const oldCount = player.inventory.length;
@@ -66,7 +58,6 @@ test('adds a potion to the inventory', () => {
     expect(player.inventory.length).toBeGreaterThan(oldCount);
 });
 
-//10.3.4. keeping track of potion
 test('uses a potion from inventory', () => {
     const player = new Player('Dave');
     player.inventory = [new Potion(), new Potion(), new Potion()];
@@ -76,7 +67,7 @@ test('uses a potion from inventory', () => {
 
     expect(player.inventory.length).toBeLessThan(oldCount);
 });
-//10.3.4 shows how to create a new test that verifies that a player's attack value is within range: 
+
 test("gets player's attack value", () => {
     const player = new Player('Dave');
     player.strength = 10;
@@ -85,7 +76,6 @@ test("gets player's attack value", () => {
     expect(player.getAttackValue()).toBeLessThanOrEqual(15);
 });
 
-//10.3.3. getHealth()
 test("subtracts from player's health", () => {
     const player = new Player('Dave');
     const oldHealth = player.health;
